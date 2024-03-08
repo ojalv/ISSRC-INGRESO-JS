@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        text-decoration: none;
+        list-style: none;
+        text-align: center;
+        padding: 0px;
+      }
+
+      li {
+        border-bottom: solid;
+        width: fit-content;
+      }
+
+      li:hover {
+        cursor: pointer;
+      }
+
+      .resaltado {
+        background-color: aquamarine;
+      }
+
+      #menu-container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+      #menu {
+        border: solid;
+        height: min-content;
+        border-radius: 5px;
+        font-size: 1.7em;
+      }
+      #menu:last-child {
+        border-bottom: none;
+      }
+
+      .item {
+        width: 100%;
+        user-select: none;
+      }
+    </style>
+    <title>97</title>
+  </head>
+  <body>
+    <h1>Haz click en un item de la lista para resaltarlo</h1>
+    <div id="menu-container">
+      <ul id="menu">
+        <li class="item">Inicio</li>
+        <li class="item">Perfil</li>
+        <li class="item">Configuracion</li>
+        <li class="item">Ayuda</li>
+        <li class="item">Cerrar sesion</li>
+      </ul>
+    </div>
+    <script src="97.js"></script>
+  </body>
+</html>
