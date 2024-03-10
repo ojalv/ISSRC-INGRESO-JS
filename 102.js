@@ -12,10 +12,8 @@ function calcularPromedioNotas(clase) {
   } else return suma;
 }
 
-claseA = {
+const claseA = {
   notas: [7, 9, 8, 6, 5, 4],
-  };
+};
 
-console.log(calcularPromedioNotas(claseA))
-
-
+console.log(calcularPromedioNotas(claseA));

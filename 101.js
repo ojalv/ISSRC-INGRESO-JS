@@ -5,6 +5,6 @@ function calcularAreaRectangulo(rectangulo) {
   return rectangulo.ancho * rectangulo.alto;
 }
 
-rectangulo = { alto: 10, ancho: 10 };
+const rectangulo = { alto: 10, ancho: 10 };
 
 console.log(calcularAreaRectangulo(rectangulo));

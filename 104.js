@@ -13,7 +13,7 @@ function filtrarProductos(eCommerce, precioMaximo) {
   return productosFiltrados;
 }
 
-eCommerceA = {
+const eCommerceA = {
   productos: [
     {
       id: 0,

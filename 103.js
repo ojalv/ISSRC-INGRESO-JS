@@ -12,7 +12,7 @@ function buscarLibro(coleccion, titulo) {
   return undefined;
 }
 
-coleccionA = {
+const coleccionA = {
   libros: [
     {
       titulo: "don quijote",
