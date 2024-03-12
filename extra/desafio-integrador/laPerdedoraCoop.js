@@ -52,11 +52,11 @@ function retiroMaiz(silo, retiro) {
 // se comprueba si el silo esta vacio
 stockMaiz(silo);
 
-// se ingresan 3000 toneladas de maiz al silo
+// se ingresan 3000 toneladas de maiz al silo y se muestra el stock actualizado
 silo = ingresoMaiz(silo, 3000);
 
 // se comprueba el stock del silo
 stockMaiz(silo);
 
-// se retiran 250 toneladas de maiz del silo
+// se retiran 250 toneladas de maiz del silo y se muestra el stock actualizado
 silo = retiroMaiz(silo, 250);
