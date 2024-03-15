@@ -6,7 +6,7 @@ const boton = document.getElementById("b1");
 const body = document.getElementById("body");
 let buttonScale = 1;
 
-boton.style.position = `sticky`;
+boton.style.position = `fixed`;
 
 boton.addEventListener("click", () => {
   body.style.backgroundColor = `rgb(${Math.random() * 255},${
