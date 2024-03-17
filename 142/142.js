@@ -14,6 +14,12 @@ botones.forEach((boton) => {
     //escucha el evento "click"
     if (boton.id != "mas" && boton.id != "menos" && boton.id != "igual") {
       //si el boton es un numero
+      if (operacionesFin) {
+        //si llegamos al final de una operacion anteriormente
+        numero = ""; //limpiamos el numero
+        pantalla.innerText = ""; //limpiamos la pantalla
+        operacionesFin = false; // iniciamos una nueva operacion
+      }
       numero += `${boton.innerText}`; //agrega un digito a la cadena numero
       if (!operador) {
         // si no se uso un operador anteriormente
@@ -24,19 +30,24 @@ botones.forEach((boton) => {
       operador = false; // volvemos a indicar que no se uso un operador
     } else if (boton.id == "mas" || boton.id == "menos") {
       //el boton es el operador + o -
+      if (operacionesFin) {
+        //si llegamos al final de una operacion anteriormente
+        numero = ""; //limpiamos el numero
+        pantalla.innerText = ""; //limpiamos la pantalla
+        operacionesFin = false; // iniciamos una nueva operacion
+      }
       if (!operador) {
         //si no se repitio un + o -
         numero = ""; // limpiamos el numero
         pantalla.innerText += boton.innerText; //agregamos el operador en la pantalla
         operaciones.push(boton.innerText); //agregamos el operador al historial de operacioneses
-        console.log(operaciones);
         operador = true;
       }
     } else if (boton.id == "igual") {
       //el boton es =
-
-      console.log(operaciones);
-      console.log(calcular(operaciones));
+      pantalla.innerText = calcular(operaciones); //calcular y mostrar el resultado en pantalla
+      operaciones.splice(0, operaciones.length); //quitamos todos los elementos del array
+      operacionesFin = true; //indicamos que llegamos al final de la operacion
     }
   });
 });
@@ -51,21 +62,16 @@ function concatenarOperaciones(operaciones) {
 
 function calcular(operaciones) {
   let total = 0;
-  console.log(`operaciones: ${operaciones}`);
   for (let i = 0; i < operaciones.length; i++) {
     // iteramos el array de operaciones
     if (i == 0 && operaciones[0] != "+" && operaciones[0] != "-") {
-      console.log(`primer elemento ${operaciones[i]} numero`);
       //verificamos que el primer elemento se un numero
       total += parseInt(operaciones[0]); //agregamos el primer elemento al total
     } else {
       if (operaciones[i] == "-") {
-        console.log(`indice ${i}  --  length ${operaciones.length}`);
         // la operacion es una resta
         if (i < operaciones.length - 1) {
           // verificamos que este no sea el ultimo elemento del array
-          console.log(operaciones[i]);
-          console.log(total);
           total -= parseInt(operaciones[i + 1]); // restamos el siguiente elemento del array (que es un numero) del total
         }
       } else if (operaciones[i] == "+") {
