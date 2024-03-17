@@ -1,48 +1,80 @@
 /*142. Calculadora Simple:
-Crea una calculadora en HTML con botones para números y operaciones básicas. Utiliza
+Crea una calculadora en HTML con botones para números y operacioneses básicas. Utiliza
 JavaScript para realizar los cálculos y mostrar el resultado en un campo de texto.*/
-
-// const b0 = document.getElementById("0");
-// const b1 = document.getElementById("1");
-// const b2 = document.getElementById("2");
-// const b3 = document.getElementById("3");
-// const b4 = document.getElementById("4");
-// const b5 = document.getElementById("5");
-// const b6 = document.getElementById("6");
-// const b7 = document.getElementById("7");
-// const b8 = document.getElementById("8");
-// const b9 = document.getElementById("9");
-// const bmas = document.getElementById("mas");
-// const bmenos = document.getElementById("menos");
-// const bigual = document.getElementById("igual");
 const pantalla = document.getElementById("pantalla");
 const botones = document.querySelectorAll(".boton");
-let operacion = ``;
-let operatorRepeat = false;
-let operationEnd = false;
+let operaciones = []; // array que contiene la historia de numeros y operadores ingresados
+let operador = false; // indica si ya se aplico un operador
+let operacionesFin = false; // indica si ya se aplico el igual
+let numero = ""; // cadena que representa el numero que se esta ingresando hasta que se agregue un operador
+
 botones.forEach((boton) => {
+  //para cada boton
   boton.addEventListener("click", () => {
-    if (operationEnd) {
-      pantalla.innerText = "";
-      operacion = "";
-      operationEnd = false;
-    }
-    if ((boton.id != "mas") & (boton.id != "menos") & (boton.id != "igual")) {
-      operacion += boton.innerText;
-      pantalla.innerText = operacion;
-      operatorRepeat = false;
-    } else if ((boton.id == "mas" || boton.id == "menos") && operacion != "") {
-      if (!operatorRepeat) {
-        operacion += boton.innerText;
-        pantalla.innerText = operacion;
-        operatorRepeat = true;
+    //escucha el evento "click"
+    if (boton.id != "mas" && boton.id != "menos" && boton.id != "igual") {
+      //si el boton es un numero
+      numero += `${boton.innerText}`; //agrega un digito a la cadena numero
+      if (!operador) {
+        // si no se uso un operador anteriormente
+        operaciones.pop(); //elimina el ultimo elemento del array (numero desactualizado)
+      }
+      operaciones.push(numero); //agrega el numero actualizado al ultimo lugar del array
+      pantalla.innerText = concatenarOperaciones(operaciones); //muestra las operaciones en pantalla
+      operador = false; // volvemos a indicar que no se uso un operador
+    } else if (boton.id == "mas" || boton.id == "menos") {
+      //el boton es el operador + o -
+      if (!operador) {
+        //si no se repitio un + o -
+        numero = ""; // limpiamos el numero
+        pantalla.innerText += boton.innerText; //agregamos el operador en la pantalla
+        operaciones.push(boton.innerText); //agregamos el operador al historial de operacioneses
+        console.log(operaciones);
+        operador = true;
       }
     } else if (boton.id == "igual") {
-      pantalla.innerText = calcular(operacion);
-      operationEnd = true;
+      //el boton es =
+
+      console.log(operaciones);
+      console.log(calcular(operaciones));
     }
   });
 });
 
-// operacion es una cadena que contiene la operacion realizada en la calculadora
-function calcular(operacion) {}
+function concatenarOperaciones(operaciones) {
+  let c = "";
+  operaciones.forEach((elemento) => {
+    c += elemento;
+  });
+  return c;
+}
+
+function calcular(operaciones) {
+  let total = 0;
+  console.log(`operaciones: ${operaciones}`);
+  for (let i = 0; i < operaciones.length; i++) {
+    // iteramos el array de operaciones
+    if (i == 0 && operaciones[0] != "+" && operaciones[0] != "-") {
+      console.log(`primer elemento ${operaciones[i]} numero`);
+      //verificamos que el primer elemento se un numero
+      total += parseInt(operaciones[0]); //agregamos el primer elemento al total
+    } else {
+      if (operaciones[i] == "-") {
+        console.log(`indice ${i}  --  length ${operaciones.length}`);
+        // la operacion es una resta
+        if (i < operaciones.length - 1) {
+          // verificamos que este no sea el ultimo elemento del array
+          console.log(operaciones[i]);
+          console.log(total);
+          total -= parseInt(operaciones[i + 1]); // restamos el siguiente elemento del array (que es un numero) del total
+        }
+      } else if (operaciones[i] == "+") {
+        if (i != operaciones.length - 1) {
+          // verificamos que este no sea el ultimo elemento del array
+          total += parseInt(operaciones[i + 1]); // sumamos el siguiente elemento del array (que es un numero) al total
+        }
+      }
+    }
+  }
+  return total;
+}
