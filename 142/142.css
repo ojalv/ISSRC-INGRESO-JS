@@ -33,6 +33,8 @@ h1 {
   height: 60px;
   background-color: rgb(33,233,4);
   border: solid;
+  overflow: hidden;
+  text-align: center;
 }
 
 #contenedor-botones{
