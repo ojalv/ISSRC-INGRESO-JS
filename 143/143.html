@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="143.css">
+    <title>143</title>
+  </head>
+  <body>
+    <h1>Formulario de registro</h1>
+    <p>Complete el formulario con la informacion solicitada</p>
+    <div class="form-container">
+      <form
+        action="'https://register-demo.freecodecamp.org'"
+        method="post"
+        id="register-form"
+      >
+        <fieldset>
+          <label for="first-name"
+            >Ingrese su nombre
+            <input type="text" name="first-name" id="first-name" required
+          /></label>
+          <label for="last-name"
+            >Ingrese su apellido
+            <input type="text" name="last-name" id="last-name" required
+          /></label>
+          <label for="email"
+            >Ingrese su direccion de correo electronico
+            <input type="email" name="email" id="email" required
+          /></label>
+          <label for="password"
+            >Cree una contraseña
+            <input type="password" name="password" id="password" required
+          /></label>
+        </fieldset>
+        <input type="submit" value="submit" />
+      </form>
+    </div>
+  </body>
+</html>
