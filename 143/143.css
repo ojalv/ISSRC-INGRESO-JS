@@ -21,17 +21,29 @@ form {
   max-width: 500px;
   min-width: 300px;
   margin: 0 auto;
-  padding-bottom: 2em;
+  padding-bottom: 1em;
 }
 
 #form-inputs-info {
+  display: block;
   top: -20px;
   width: 100%;
   max-width: 450px;
-  background-color: rgba(134, 42, 8, 0.733);
+  background-color: none;
   border-radius: 16px;
+  padding: 0px;
 }
 
+#form-inputs-info p {
+  text-align: left;
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.inactive {
+  display: none !important;
+}
 fieldset {
   border: none;
   padding: 2rem 0;
@@ -68,4 +80,8 @@ input[type="submit"] {
   background-color: #3b3b4f;
   border-color: white;
   min-width: 300px;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
 }

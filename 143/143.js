@@ -7,14 +7,21 @@ const userName = document.getElementById("first-name");
 const userLastName = document.getElementById("last-name");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-const formInfo = document.getElementById("form-info");
-//nombre sin caracteres especiales
+const formInfo = document.getElementById("form-inputs-info");
+
+// flags que indican si los inputs son validos
+let userNameOk = false;
+let userLastNameOk = false;
+let emailOk = false;
+let passwordOk = false;
+
+/* Funciones de valiacion */
+
 function validateName(name) {
   // Expresión regular que coincide con cualquier caracter que no sea letra, numero o espacio
   let regex = /[^\w\s]/;
   return !regex.test(name);
 }
-//email valido
 function validateEmail(email) {
   // Expresión regular para validar un correo electrónico
   let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,38 +34,70 @@ function validatePassword(password) {
   return regex.test(password);
 }
 
+/* Listeners */
+
+// Listener del submit del formulario
 form.addEventListener("submit", (event) => {
-  event.preventDefault();
+  event.preventDefault(); // evitamos el comportamiento por defecto
+
+  /*Si todos los inputs del formulario son validos*/
+  if (userNameOk && userLastNameOk && emailOk && passwordOk) {
+    alert("formulario enviado"); //indicamos al usuario que el formulario fue enviado (con todos los campos validos)
+  }
 });
 
-userName.addEventListener("keyup", (event) => {
+// Listener del input del nombre
+userName.addEventListener("keyup", () => {
+  formInfo.classList.remove("inactive");
   if (validateName(userName.value)) {
-    console.log("nombre valido");
+    document.querySelector("#name-status").classList.add("inactive");
+    userNameOk = true;
   } else {
-    console.log("nombre invalido");
+    document.querySelector("#name-status").classList.remove("inactive");
+    document.querySelector("#name-status").innerText =
+      "nombre invalido: no utilice caracteres especiales";
+    userNameOk = false;
   }
 });
 
-userLastName.addEventListener("keyup", (event) => {
+// Listener del input del apellido
+userLastName.addEventListener("keyup", () => {
+  formInfo.classList.remove("inactive");
   if (validateName(userLastName.value)) {
-    console.log("apellido valido");
+    document.querySelector("#last-name-status").classList.add("inactive");
+    userLastNameOk = true;
   } else {
-    console.log("apellido invalido");
+    document.querySelector("#last-name-status").classList.remove("inactive");
+    document.querySelector("#last-name-status").innerText =
+      "apellido invalido: no utilice caracteres especiales ni numeros";
+    userLastNameOk = false;
   }
 });
 
-email.addEventListener("keyup", (event) => {
+// Listener del input del email
+email.addEventListener("keyup", () => {
+  formInfo.classList.remove("inactive");
   if (validateEmail(email.value)) {
-    console.log("email valido");
+    document.querySelector("#email-status").classList.add("inactive");
+    emailOk = true;
   } else {
-    console.log("email invalido");
+    document.querySelector("#email-status").classList.remove("inactive");
+    document.querySelector("#email-status").innerText =
+      "email invalido: por favor ingrese un email valido";
+    emailOk = false;
   }
 });
 
-password.addEventListener("keyup", (event) => {
+// Listener del input de la contraseña
+password.addEventListener("keyup", () => {
+  formInfo.classList.remove("inactive");
   if (validatePassword(password.value)) {
-    console.log("pass valida");
+    document.querySelector("#password-status").classList.add("inactive");
+    passwordOk = true;
   } else {
-    console.log("pass invalida");
+    document.querySelector("#password-status").classList.remove("inactive");
+    document.querySelector("#password-status").innerText =
+      "contraseña invalida: la contraseña debe tener al menos 8 caracteres, una mayuscula y 2 numeros";
+    passwordOk = false;
   }
 });
